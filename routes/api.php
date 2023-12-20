@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarParkController;
 use App\Http\Controllers\CarParkSpacesController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,6 @@ Route::post('/login', LoginController::class);
 Route::middleware('auth:sanctum')->group(function() {
     Route::get('/car-parks', CarParkController::class);
     Route::get('/car-parks/{car_park}/spaces', CarParkSpacesController::class);
+
+    Route::get('/users/{user}/reservations', UserReservationController::class);
 });
