@@ -13,6 +13,12 @@ class CarParkSpacesController extends Controller
      */
     public function __invoke(SpaceRequest $request, CarPark $carPark)
     {
-        return new SpaceCollection($carPark->spaces()->paginate());
+        $spaces = $carPark->spaces();
+
+        if ($request->has('from') || $request->has('to')) {
+            $spaces->unreserved($request->date('from'), $request->date('to'));
+        }
+
+        return new SpaceCollection($spaces->paginate());
     }
 }

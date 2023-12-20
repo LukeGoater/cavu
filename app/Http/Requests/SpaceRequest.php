@@ -23,7 +23,8 @@ class SpaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'from' => ['required_with:to', 'before:to', 'date'],
+            'to' => ['required_with:from', 'after:from', 'date'],
         ];
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Space extends Model
 {
@@ -30,5 +31,13 @@ class Space extends Model
     public function reservations(): MorphMany
     {
         return $this->morphMany(Reservation::class, 'reservable');
+    }
+
+    /**
+     * Only show unreserved spaces.
+     */
+    public function scopeUnreserved(Builder $query, Carbon $from, Carbon $to): void
+    {
+        $query->whereDoesntHave('reservations', fn(Builder $q) => $q->where('from', '<', $to)->where('to', '>', $from));
     }
 }
