@@ -25,6 +25,6 @@ class LoginController extends Controller
    
         return response()
             ->json($user)
-            ->header('Token', $user->createToken('api')->plainTextToken);
+            ->header('oken', $user->createToken('api')->plainTextToken);
     }
 }
