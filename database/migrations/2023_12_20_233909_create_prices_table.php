@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->morphs('reservable');
-            $table->dateTime('from');
-            $table->dateTime('to');
+            $table->morphs('saleable');
             $table->integer('price');
             $table->string('currency');
+            $table->dateTime('from');
+            $table->dateTime('to');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('prices');
     }
 };

@@ -40,4 +40,12 @@ class Space extends Model
     {
         $query->whereDoesntHave('reservations', fn(Builder $q) => $q->where('from', '<', $to)->where('to', '>', $from));
     }
+
+    /**
+     * Get the prices for this space
+     */
+    public function prices(): MorphMany
+    {
+        return $this->morphMany(Price::class, 'saleable');
+    }
 }
