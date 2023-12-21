@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SpaceReservationRequest;
+use App\Http\Resources\ReservationResource;
 use App\Models\Space;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -23,5 +24,7 @@ class SpaceReservationController extends Controller
             'from' => $request->date('from'),
             'to' => $request->date('to'),
         ]);
+
+        return new ReservationResource($reservation);
     }
 }
