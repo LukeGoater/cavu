@@ -48,4 +48,19 @@ class Space extends Model
     {
         return $this->morphMany(Price::class, 'saleable');
     }
+
+    public function price(Carbon $day): int
+    {
+        return $this->prices()->where('from', '<', $day)->where('to', '>', 'day')->first()->price ?? 0;
+    }
+
+    /**
+     * Check if the space is available between dates
+     */
+    public function isAvailable(Carbon $from, Carbon $to): bool
+    {
+        return !$this->reservations()->where('from', '<', $to)->where('to', '>', $from)->count();
+    }
+
+    
 }

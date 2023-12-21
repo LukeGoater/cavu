@@ -18,7 +18,6 @@ class PriceFactory extends Factory
     {
         return [
             'price' => $this->faker->numberBetween(1, 100),
-            'currency' => $this->faker->currencyCode(),
             'from' => $this->faker->dateTimeBetween('-1 month', 'now'),
             'to' => $this->faker->dateTimeBetween('now', '+1 month'),
          ];

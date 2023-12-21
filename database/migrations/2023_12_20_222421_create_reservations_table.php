@@ -18,7 +18,6 @@ return new class extends Migration
             $table->dateTime('from');
             $table->dateTime('to');
             $table->integer('price');
-            $table->string('currency');
             $table->timestamps();
         });
     }

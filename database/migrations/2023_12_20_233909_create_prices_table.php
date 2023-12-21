@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->morphs('saleable');
             $table->integer('price');
-            $table->string('currency');
             $table->dateTime('from');
             $table->dateTime('to');
             $table->timestamps();
