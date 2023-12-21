@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::post('/spaces/{space}/reservations', SpaceReservationController::class);
     
-    Route::apiResource('reservations', ReservationController::class)->only(['destroy']);
+    Route::apiResource('reservations', ReservationController::class)->only(['update', 'destroy']);
 
     Route::get('/users/{user}/reservations', UserReservationController::class);
 });

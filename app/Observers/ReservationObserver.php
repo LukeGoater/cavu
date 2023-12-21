@@ -13,4 +13,12 @@ class ReservationObserver
     {
         $reservation->price = $reservation->calculatePrice();
     }
+
+    /**
+     * Handle the Reservation "created" event.
+     */
+    public function updating(Reservation $reservation): void
+    {
+        $reservation->price = $reservation->calculatePrice();
+    }
 }
