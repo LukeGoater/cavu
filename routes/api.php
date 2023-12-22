@@ -1,6 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\CarParkController;
+use App\Http\Controllers\CarParkSpacesController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SpaceReservationController;
+use App\Http\Controllers\UserReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::post('/login', LoginController::class);
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/car-parks', CarParkController::class);
+    Route::get('/car-parks/{car_park}/spaces', CarParkSpacesController::class);
+
+    Route::post('/spaces/{space}/reservations', SpaceReservationController::class);
+    
+    Route::apiResource('reservations', ReservationController::class)->only(['update', 'destroy']);
+
+    Route::get('/users/{user}/reservations', UserReservationController::class);
 });
